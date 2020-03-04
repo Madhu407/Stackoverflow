@@ -1,0 +1,54 @@
+TypeError                                 Traceback (most recent call last)
+~/anaconda3/lib/python3.7/site-packages/numpy/core/function_base.py in linspace(start, stop, num, endpoint, retstep, dtype, axis)
+    116     try:
+--> 117         num = operator.index(num)
+    118     except TypeError:
+
+TypeError: 'float' object cannot be interpreted as an integer
+
+During handling of the above exception, another exception occurred:
+
+TypeError                                 Traceback (most recent call last)
+<ipython-input-57-bd5f70146dee> in <module>
+      1 import matplotlib.pyplot as plt
+      2 import seaborn as sns
+----> 3 heatMap(new_autos)
+
+<ipython-input-56-281949554243> in heatMap(df)
+      5     fig, ax = plt.subplots(figsize=(10, 10))
+      6     #Generate Color Map
+----> 7     colormap = sns.diverging_palette(220, 10, as_cmap=True)
+      8     #Generate Heat Map, allow annotations and place floats in map
+      9     sns.heatmap(corr, cmap=colormap, annot=True, fmt=".2f")
+
+~/anaconda3/lib/python3.7/site-packages/seaborn/palettes.py in diverging_palette(h_neg, h_pos, s, l, sep, n, center, as_cmap)
+    742     """
+    743     palfunc = dark_palette if center == "dark" else light_palette
+--> 744     neg = palfunc((h_neg, s, l), 128 - (sep / 2), reverse=True, input="husl")
+    745     pos = palfunc((h_pos, s, l), 128 - (sep / 2), input="husl")
+    746     midpoint = dict(light=[(.95, .95, .95, 1.)],
+
+~/anaconda3/lib/python3.7/site-packages/seaborn/palettes.py in light_palette(color, n_colors, reverse, as_cmap, input)
+    639     light = set_hls_values(color, l=.95)  # noqa
+    640     colors = [color, light] if reverse else [light, color]
+--> 641     return blend_palette(colors, n_colors, as_cmap)
+    642 
+    643 
+
+~/anaconda3/lib/python3.7/site-packages/seaborn/palettes.py in blend_palette(colors, n_colors, as_cmap, input)
+    775     pal = mpl.colors.LinearSegmentedColormap.from_list(name, colors)
+    776     if not as_cmap:
+--> 777         pal = _ColorPalette(pal(np.linspace(0, 1, n_colors)))
+    778     return pal
+    779 
+
+<__array_function__ internals> in linspace(*args, **kwargs)
+
+~/anaconda3/lib/python3.7/site-packages/numpy/core/function_base.py in linspace(start, stop, num, endpoint, retstep, dtype, axis)
+    119         raise TypeError(
+    120             "object of type {} cannot be safely interpreted as an integer."
+--> 121                 .format(type(num)))
+    122 
+    123     if num < 0:
+
+TypeError: object of type <class 'float'> cannot be safely interpreted as an integer.
